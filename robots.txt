@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://imarodoly-perdan.github.io/pc-pgdemo-com/sitemap.xml

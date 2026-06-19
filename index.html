@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>pg模拟器 · 快速识别用途</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #fafcfd;
+      color: #1e2a3a;
+      line-height: 1.6;
+      padding: 2rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .page {
+      max-width: 680px;
+      width: 100%;
+    }
+    /* 主视觉区 — 卡片 + 标题组合 */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2.25rem 2rem;
+      box-shadow: 0 10px 30px -10px rgba(0, 20, 30, 0.08);
+      margin-bottom: 2.5rem;
+      border: 1px solid #e8eef2;
+    }
+    .hero-card h1 {
+      font-size: 2.2rem;
+      font-weight: 550;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #0a1c2c;
+      margin-bottom: 0.75rem;
+    }
+    .hero-card h1 small {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #5c6f7e;
+      letter-spacing: 0.01em;
+      margin-top: 0.4rem;
+    }
+    .hero-card .tagline {
+      font-size: 1.1rem;
+      color: #2e445a;
+      border-left: 4px solid #4481b3;
+      padding-left: 1rem;
+      margin: 1rem 0 0.3rem;
+    }
+    .hero-note {
+      background: #f1f6fa;
+      border-radius: 18px;
+      padding: 1.2rem 1.5rem;
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      color: #1a3147;
+    }
+    .hero-note a {
+      color: #1d6f9c;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #b8d1e3;
+      transition: color 0.15s;
+    }
+    .hero-note a:hover {
+      color: #094c73;
+      border-bottom-color: #094c73;
+    }
+    /* 层级标题 */
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin: 2rem 0 1rem;
+      color: #102433;
+      border-bottom: 2px solid #e3ecf3;
+      padding-bottom: 0.4rem;
+    }
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: #1b334b;
+    }
+    /* 用途卡片组 —— 三列网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0 1rem;
+    }
+    .usage-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.5rem 1.25rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      border: 1px solid #e1eaf1;
+      transition: box-shadow 0.2s;
+    }
+    .usage-card:hover {
+      box-shadow: 0 6px 18px rgba(40, 80, 120, 0.05);
+    }
+    .usage-card .icon {
+      font-size: 1.7rem;
+      margin-bottom: 0.3rem;
+      display: block;
+      line-height: 1;
+    }
+    .usage-card h3 {
+      margin: 0.2rem 0 0.3rem;
+      font-weight: 550;
+    }
+    .usage-card p {
+      font-size: 0.9rem;
+      color: #3d566b;
+    }
+    /* 适合人群 + 一句话 */
+    .audience-block {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.6rem 1.8rem;
+      margin: 1.8rem 0 1.2rem;
+      border: 1px solid #e1eaf1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .audience-item {
+      flex: 1 1 140px;
+      margin: 0.4rem 0;
+    }
+    .audience-item span {
+      display: inline-block;
+      background: #e9f0f7;
+      border-radius: 40px;
+      padding: 0.25rem 0.9rem;
+      font-size: 0.9rem;
+      font-weight: 450;
+      color: #1d3b56;
+    }
+    .audience-block .note {
+      font-size: 0.9rem;
+      color: #32546d;
+      border-left: 1px solid #d3e0ea;
+      padding-left: 1.2rem;
+      max-width: 300px;
+    }
+    .audience-block .note a {
+      color: #1d6f9c;
+      text-decoration: none;
+      border-bottom: 1px solid #c0d7e9;
+    }
+    .audience-block .note a:hover {
+      border-bottom-color: #12597b;
+    }
+    /* 自然链接段落 */
+    .link-paragraph {
+      background: #f7faff;
+      border-radius: 24px;
+      padding: 1.5rem 1.8rem;
+      margin: 2rem 0 1.5rem;
+      font-size: 0.98rem;
+    }
+    .link-paragraph a {
+      color: #1d6f9c;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid #c0d7e9;
+    }
+    .link-paragraph a:hover {
+      color: #094268;
+      border-bottom-color: #094268;
+    }
+    .link-paragraph strong {
+      font-weight: 550;
+      color: #0c2b40;
+    }
+    /* FAQ 摘要 */
+    .faq-mini {
+      margin: 2.2rem 0 1rem;
+      border-top: 1px solid #dde7f0;
+      padding-top: 1.5rem;
+    }
+    .faq-item {
+      margin: 0.7rem 0;
+    }
+    .faq-item .q {
+      font-weight: 500;
+      color: #0f2b3f;
+      font-size: 0.98rem;
+    }
+    .faq-item .a {
+      font-size: 0.92rem;
+      color: #3f5a6f;
+      margin-left: 1rem;
+      margin-top: 0.1rem;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #d8e4ee;
+      margin: 2rem 0 1rem;
+    }
+    .footer-meta {
+      font-size: 0.85rem;
+      color: #6b8296;
+      margin: 2rem 0 0.5rem;
+      text-align: center;
+    }
+    /* 响应式微调 */
+    @media (max-width: 480px) {
+      body { padding: 1.5rem 0.9rem; }
+      .hero-card { padding: 1.6rem 1.2rem; }
+      .hero-card h1 { font-size: 1.8rem; }
+      .card-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .usage-card { padding: 1rem 0.9rem; }
+      .audience-block { flex-direction: column; align-items: start; gap: 0.8rem; }
+      .audience-block .note { border-left: none; padding-left: 0; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 主视觉卡片 -->
+  <div class="hero-card">
+    <h1>
+      pg模拟器
+      <small>快速识别用途 · 精简信息卡</small>
+    </h1>
+    <div class="tagline">
+      面向需要理解 PC 端 pg 模拟场景的用户
+    </div>
+    <div class="hero-note">
+      <strong>一句话定位</strong> —— 如果你在搜寻一个用来运行、测试或体验 pg 环境的模拟工具，这个站点提供了直接的 Web 端方案。
+      从实用角度看，<a href="https://pc-pgdemo.com">pg模拟器</a> 的核心是让用户省去本地配置的步骤，
+      在浏览器里获得接近真实 pg 的交互与反馈。
+    </div>
+  </div>
+
+  <!-- 用途卡片 (info cards) -->
+  <h2>常见用途</h2>
+  <div class="card-grid">
+    <div class="usage-card">
+      <span class="icon">⚙️</span>
+      <h3>快速验证</h3>
+      <p>无需安装，直接通过页面模拟 pg 响应，适合逻辑或界面原型测试。</p>
+    </div>
+    <div class="usage-card">
+      <span class="icon">📘</span>
+      <h3>学习参考</h3>
+      <p>观察模拟器如何处理常见指令与状态，辅助理解 pg 的运行机制。</p>
+    </div>
+    <div class="usage-card">
+      <span class="icon">🖥️</span>
+      <h3>轻量演示</h3>
+      <p>向团队或客户展示 pg 相关功能流程，而不必搭建完整环境。</p>
+    </div>
+    <div class="usage-card">
+      <span class="icon">🔍</span>
+      <h3>兼容比照</h3>
+      <p>在模拟环境中对比不同参数或配置的输出差异，辅助决策。</p>
+    </div>
+  </div>
+
+  <!-- 适合人群 + 一句带链接自然说明 -->
+  <div class="audience-block">
+    <div class="audience-item"><span>开发者</span></div>
+    <div class="audience-item"><span>测试人员</span></div>
+    <div class="audience-item"><span>技术文档撰写者</span></div>
+    <div class="audience-item"><span>培训讲师</span></div>
+    <div class="note">
+      如果你属于以上任一角色，并且需要一个随时可用的 pg 模拟环境，
+      可以尝试 <a href="https://pc-pgdemo.com">pg模拟器</a> 来快速完成日常任务。
+    </div>
+  </div>
+
+  <!-- 自然链接段落 (更偏向场景) -->
+  <div class="link-paragraph">
+    <strong>场景说明</strong> —— 当你在做接口调试或数据样例展示时，
+    并不想每次都启动完整的 pg 后台。此时浏览器端的
+    <a href="https://pc-pgdemo.com">pg模拟器</a> 提供了一种轻量的替代：
+    你可以在上面执行典型查询，观察返回格式，或者用它来生成示例输出。
+    它的定位是辅助工具，不是完整 pg 发行版，但对于快速识别用途而言已经足够。
+    很多使用者反馈它减少了环境切换的摩擦，尤其适合演示或教学片段。
+  </div>
+
+  <!-- FAQ 摘要（非完整FAQ，仅摘2-3条） -->
+  <div class="faq-mini">
+    <h2 style="border-bottom: none; margin-top: 0; font-size: 1.3rem;">常见疑惑摘要</h2>
+    <div class="faq-item">
+      <div class="q">▸ 这个模拟器需要注册吗？</div>
+      <div class="a">不需要。打开页面即可使用，不收集个人数据。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">▸ 模拟结果可导出吗？</div>
+      <div class="a">部分版本支持复制结果文本；具体以页面功能为准。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">▸ 和真实 pg 环境有差异吗？</div>
+      <div class="a">模拟器侧重快速识别与演示，不会覆盖所有 pg 特性。</div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="footer-meta">
+    pc-pgdemo.com · 信息卡片式介绍 · 简洁专业
+  </div>
+
+</div>
+</body>
+</html>
